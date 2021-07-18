@@ -1,12 +1,13 @@
 package app.application.work.api.api
 
-import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MyRetrofit {
-    private val retrofit : Retrofit
+    private val retrofit : Retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create()).build()
+
     //instanciando o products api
     fun productApi() : ProductsApi {
         return retrofit.create(ProductsApi::class.java)
@@ -29,7 +30,5 @@ class MyRetrofit {
 
     init {
         //inicializando a variavel, retorno em gson e converter para classe product, depois um build para instanciar
-        retrofit = Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()).build()
     }
 }
